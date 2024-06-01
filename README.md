@@ -4,13 +4,23 @@
 - Simulations - MainSimulation for load tests, Debug for debug
 - LoadGenParams allows you set load type - "debug", "max", "stable", "constantUsers"
 - db and csv feeder on your choice, sql file to create db for feeder (postgres)
-- simulation.conf for test parameters, you can override in pipeline
+- simulation.conf for test parameters
 - Jenkinsfile for execute load-test from jenkins
-- Возможность выставлять параметры в сборке при запуске тестов
+- Start job in Jenkins with override parameters in simulation.conf
 
-## Jenkins Plugins for Jenkinsfile pipeline:
-- Gatling Jenkins Plugin
-- Git plugin
+## Metrics (base statistics)
+- Graphite to Telegraf
+- Telegraf use plugin socket_listener
+- Telegraf send metrics to InfluxDB2
+- Grafana use datasource InfluxDB2 и Flux language
+
+## Plugins:
+- Maven gatling plugin
 
 ## Build tool:
 - maven
+
+## Start test local
+```chatinput
+mvn gatling:test -Dgatling.simulationClass=$simulationClass -Dintensity=$intensity -Dtype=$loadType
+```
